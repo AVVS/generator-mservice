@@ -1,4 +1,4 @@
-# generator-mservice [![Build Status](https://secure.travis-ci.org/AVVS/generator-mservice.png?branch=master)](https://travis-ci.org/AVVS/generator-mservice)
+# generator-mservice
 
 > [Yeoman](http://yeoman.io) generator
 
