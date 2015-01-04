@@ -21,8 +21,9 @@ function handleMessages(message, info, raw, callback) {
   // You've specified { ack: true, prefetchCount: <%= connectorAMQPServer_neck %> }
   // make sure that you call raw.acknowledge() or raw.reject(Boolean) or the service
   // will get stuck
-<% } %>}
 <% } %>
+}<% } %>
+
 // init all connectors we use
 module.exports = function initService(done) {
   var connectors = [];
