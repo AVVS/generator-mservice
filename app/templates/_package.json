@@ -1,0 +1,31 @@
+{
+  "name": "mservice-<%= name %>",
+  "description": "<%= description %>",
+  "version": "0.1.0",
+  "main": "<%= main %>",
+  "scripts": {
+    "test": "multi='list=- xunit=test-report.xml' ./node_modules/.bin/mocha -R mocha-multi"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arkcore/mservice-<%= name %>.git"
+  },
+  "author": "<%= username %> <<%= email %>>",
+  "license": "Private",
+  "bugs": {
+    "url": "https://github.com/arkcore/mservice-<%= name %>/issues"
+  },
+  "homepage": "https://github.com/arkcore/mservice-<%= name %>",
+  "dependencies": {
+    "mservice-utils": "*",
+    "arklogger": "*",
+    "async": "^0.9.0",
+    "lodash-node": "^2.4.1"<% if (connectorS3) { %>,
+    "scraping-utils": "*"<% } %>
+  },
+  "devDependencies": {
+    "chai": "^1.9.2",
+    "mocha": "^1.21.5",
+    "mocha-multi": "^0.4.1"
+  }
+}
