@@ -1,7 +1,7 @@
 'use strict';
 
 var _ = require('lodash-node');
-var config = require('../config.js')();
+var config = require('../lib/config.js')();
 var cfg = _.pick(config, ['listen', 'queue', 'name']);
 var utils = require('mservice-utils');
 var amqpServer;

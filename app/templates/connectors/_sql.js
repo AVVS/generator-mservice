@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('../config.js')();
+var config = require('../lib/config.js')();
 var async = require('async');
 var utils = require('mservice-utils');
 

@@ -9,10 +9,10 @@ var config = require('./config.js')();
 var logger = require('./logger.js');
 
 // connectors
-<% if (connectorAMQPClient) { %>var amqpClient = require('./connectors/amqp-client.js');
-<% } %><% if (connectorAMQPServer) { %>var amqp = require('./connectors/amqp.js');
-<% } %><% if (connectorS3) { %>var s3 = require('./connectors/s3.js');
-<% } %><% if (connectorSQL) { %>var sql = require('./connectors/sql.js');<% } %>
+<% if (connectorAMQPClient) { %>var amqpClient = require('../connectors/amqp-client.js');
+<% } %><% if (connectorAMQPServer) { %>var amqp = require('../connectors/amqp.js');
+<% } %><% if (connectorS3) { %>var s3 = require('../connectors/s3.js');
+<% } %><% if (connectorSQL) { %>var sql = require('../connectors/sql.js');<% } %>
 <% if (connectorAMQPServer) { %>
 function handleMessages(message, info, raw, callback) {
   // write your own handler here
