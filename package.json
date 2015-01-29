@@ -1,6 +1,6 @@
 {
   "name": "generator-mservice",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Generates micro-service boilterplate code for use with AMQP",
   "license": "MIT",
   "main": "app/index.js",
