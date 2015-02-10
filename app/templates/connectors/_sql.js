@@ -13,29 +13,28 @@ var sqlSequence = fs.readFileSync(__dirname + '/sql/sequence.sql', 'utf-8');<% }
 var sqlClient;
 
 module.exports = function initSQL(callback) {
-  if (typeof callback === 'undefined') {
-    return sqlClient;
-  }
-
-  async.series([
-    function connectToSQL(next) {
-      sqlClient = new utils.Sql(config.sql, next);
-    }<% if (connectorSQL_createSchema) { %>,
-
-    function createDatabase(next) {
-      sqlClient.ensureDatabaseExists(config.sql.database, next);
+    if (typeof callback === 'undefined') {
+        return sqlClient;
     }
 
-    , function createStructure(next) {
-      sqlClient.sequence([sqlSequence, sqlSchema], next);
-    }<% } %>
+    async.series([
+        function connectToSQL(next) {
+            sqlClient = new utils.Sql(config.sql, next);
+        }<% if (connectorSQL_createSchema) { %>,
 
-  ], function sqlConnectionInitialized(err) {
-    if (err) {
-      return callback(err);
-    }
+        function createDatabase(next) {
+            sqlClient.ensureDatabaseExists(config.sql.database, next);
+        },
 
-    return callback(null, sqlClient);
-  });
+        function createStructure(next) {
+            sqlClient.sequence([sqlSequence, sqlSchema], next);
+        }<% } %>
+
+    ], function sqlConnectionInitialized(err) {
+        if (err) {
+            return callback(err);
+        }
+
+        return callback(null, sqlClient);
+    });
 };
-

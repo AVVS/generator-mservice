@@ -15,23 +15,23 @@ var logger = require('./logger.js');
 <% } %><% if (connectorSQL) { %>var sql = require('../connectors/sql.js');<% } %>
 <% if (connectorAMQPServer) { %>
 function handleMessages(message, info, raw, callback) {
-  // write your own handler here
-  // info.routingKey - is the route message came for
-  <% if (connectorAMQPServer_neck) { %>
-  // You've specified { ack: true, prefetchCount: <%= connectorAMQPServer_neck %> }
-  // make sure that you call raw.acknowledge() or raw.reject(Boolean) or the service
-  // will get stuck
-<% } %>
+    // write your own handler here
+    // info.routingKey - is the route message came for
+    <% if (connectorAMQPServer_neck) { %>
+        // You've specified { ack: true, prefetchCount: <%= connectorAMQPServer_neck %> }
+        // make sure that you call raw.acknowledge() or raw.reject(Boolean) or the service
+        // will get stuck
+    <% } %>
 }<% } %>
 
 // init all connectors we use
 module.exports = function initService(done) {
-  var connectors = [];
-  // add connectors to the init stack
-<% if (connectorAMQPServer) { %>  connectors.push(async.apply(amqp, handleMessages));
-<% } %><% if (connectorAMQPClient) { %>  connectors.push(amqpClient);
-<% } %><% if (connectorS3) { %>  connectors.push(s3);
-<% } %><% if (connectorSQL) { %>  connectors.push(sql);<% } %>
+    var connectors = [];
+    // add connectors to the init stack
+<% if (connectorAMQPServer) { %>    connectors.push(async.apply(amqp, handleMessages));
+<% } %><% if (connectorAMQPClient) { %>    connectors.push(amqpClient);
+<% } %><% if (connectorS3) { %>    connectors.push(s3);
+<% } %><% if (connectorSQL) { %>    connectors.push(sql);<% } %>
 
-  async.parallel(connectors, done);
+    async.parallel(connectors, done);
 };

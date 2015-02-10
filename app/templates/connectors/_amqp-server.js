@@ -7,9 +7,9 @@ var utils = require('mservice-utils');
 var amqpServer;
 
 module.exports = function (handleMessages, callback) {
-  if (typeof handleMessages === 'function' && typeof callback === 'function') {
-    amqpServer = utils.common.connectToAMQP(cfg, handleMessages, callback);
-  }
+    if (typeof handleMessages === 'function' && typeof callback === 'function') {
+        amqpServer = utils.common.connectToAMQP(cfg, handleMessages, callback);
+    }
 
-  return amqpServer;
+    return amqpServer;
 };
