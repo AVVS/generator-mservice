@@ -1,15 +1,26 @@
 {
-  "name": "<%= name %>"<% if (connectorAMQPServer) { %>,
-  "listen": "<%= connectorAMQPServer_listen %>",
-  "queue": "<%= connectorAMQPServer_queue %>"<% if (connectorAMQPServer_neck) { %>,
-  "neck": <%= connectorAMQPServer_neck_size %><% } %><% } %><% if (connectorSQL) { %>,
-  "sql": {
-    "database": "<%= connectorSQL_database %>"
-  }<% } %><% if (connectorS3) { %>,
-  "s3": {
-    "bucket": "<%= connectorS3_bucket %>",
-    "user": "<%= connectorS3_user %>",
-    "endpoint": "127.0.0.1",
-    "port": 6788
-  }<% } %>
+    "name": "<%= name %>"<% if (connectorAMQPServer) { %>,
+    "listen": "<%= connectorAMQPServer_listen %>",
+    "queue": "<%= connectorAMQPServer_queue %>"<% if (connectorAMQPServer_neck) { %>,
+    "neck": <%= connectorAMQPServer_neck_size %><% } %><% } %><% if (connectorSQL) { %>,
+    "sql": {
+        "database": "<%= connectorSQL_database %>"
+    }<% } %><% if (connectorS3) { %>,
+    "s3": {
+        "bucket": "<%= connectorS3_bucket %>",
+        "user": "<%= connectorS3_user %>",
+        "endpoint": "127.0.0.1",
+        "port": 6788
+    }<% } %><% if (connectorRedis || connectorPubsub) { %>,
+    "redisHA": {
+        "sentinels": [
+            [ "127.0.0.1", "26379" ]
+        ],
+        "masterName": "sentinel_-ark-sentinel",
+        "masterOptions": {
+            "no_ready_check": true,
+            "return_buffers": true
+        }
+    }<% } %><% if (connectorPubsub) { %>,
+    "pubsubChannel": "<%= connectorPubsubChannel %>"<% } %>
 }

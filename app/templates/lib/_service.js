@@ -12,7 +12,9 @@ var logger = require('./logger.js');
 <% if (connectorAMQPClient) { %>var amqpClient = require('../connectors/amqp-client.js');
 <% } %><% if (connectorAMQPServer) { %>var amqp = require('../connectors/amqp.js');
 <% } %><% if (connectorS3) { %>var s3 = require('../connectors/s3.js');
-<% } %><% if (connectorSQL) { %>var sql = require('../connectors/sql.js');<% } %>
+<% } %><% if (connectorSQL) { %>var sql = require('../connectors/sql.js');
+<% } %><% if (connectorRedis) { %>var redisHA = require('../connectors/redis-sentinel.js');
+<% } %><% if (connectorPubsub) { %>var redisPubsub = require('../connectors/redis-pubsub.js');<% } %>
 <% if (connectorAMQPServer) { %>
 function handleMessages(message, info, raw, callback) {
     // write your own handler here
@@ -31,7 +33,9 @@ module.exports = function initService(done) {
 <% if (connectorAMQPServer) { %>    connectors.push(async.apply(amqp, handleMessages));
 <% } %><% if (connectorAMQPClient) { %>    connectors.push(amqpClient);
 <% } %><% if (connectorS3) { %>    connectors.push(s3);
-<% } %><% if (connectorSQL) { %>    connectors.push(sql);<% } %>
+<% } %><% if (connectorSQL) { %>    connectors.push(sql);
+<% } %><% if (connectorRedis) { %>    connectors.push(redisHA);
+<% } %><% if (connectorPubsub) { %>    connectors.push(redisPubsub);<% } %>
 
     async.parallel(connectors, done);
 };

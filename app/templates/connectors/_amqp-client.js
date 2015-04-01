@@ -8,5 +8,9 @@ module.exports = function (callback) {
         amqpClient = new utils.AMQP(callback);
     }
 
+    if (!amqpClient) {
+        throw new Error('aqpClient not initialized');
+    }
+
     return amqpClient;
 };

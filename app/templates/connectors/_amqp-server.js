@@ -11,5 +11,9 @@ module.exports = function (handleMessages, callback) {
         amqpServer = utils.common.connectToAMQP(cfg, handleMessages, callback);
     }
 
+    if (!amqpServer) {
+        throw new Error('amqpServer not initialized');
+    }
+
     return amqpServer;
 };

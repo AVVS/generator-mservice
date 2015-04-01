@@ -19,13 +19,15 @@
   "dependencies": {
     "mservice-utils": "*",
     "arklogger": "*",
-    "async": "^0.9.0",
+    "neo-async": "^0.6.2",
     "lodash-node": "^3.1.0"<% if (connectorS3) { %>,
-    "scraping-utils": "*"<% } %>
+    "ceph-s3": "^1.0.0"<% } %><% if (connectorRedis || connectorPubsub) { %>,
+    "redis-sentinel-client": "^0.2.5"<% } %><% if (hiredis) { %>,
+    "hiredis": "^0.2.0"<% } %>
   },
   "devDependencies": {
     "chai": "^1.9.2",
     "mocha": "^1.21.5",
-    "mocha-multi": "^0.4.1"
+    "mocha-multi": "^0.6.1"
   }
 }

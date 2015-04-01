@@ -32,6 +32,10 @@ module.exports = yeoman.generators.Base.extend({
       return answers.connectorS3 === true;
     }
 
+    function hasPubsub(answers) {
+        return answers.connectorPubsub === true;
+    }
+
     var prompts = [
       {
         type: 'input',
@@ -146,6 +150,31 @@ module.exports = yeoman.generators.Base.extend({
         message: 'What bucket should be used for connecting to S3?',
         default: 'test-bucket',
         when: hasS3
+      },
+      {
+        type: 'confirm',
+        name: 'connectorRedis',
+        message: 'Should it include redis-sentinel connector?',
+        default: false
+      },
+      {
+        type: 'confirm',
+        name: 'connectorPubsub',
+        message: 'Should it include redis-pubsub connector?',
+        default: false
+      },
+      {
+        type: 'input',
+        name: 'connectorPubsubChannel',
+        message: 'What pubsub channel should be used?',
+        default: 'mservice-pubsub',
+        when: hasPubsub
+      },
+      {
+        type: 'confirm',
+        name: 'hiredis',
+        message: 'Should we include hiredis parser?',
+        default: true
       }
     ];
 
